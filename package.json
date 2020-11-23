@@ -1,10 +1,22 @@
 {
-  "name": "fop",
+  "name": "client-request-substitute",
   "version": "1.0.0",
   "description": "Frontend oriented programming",
   "main": "index.js",
-  "repository": "https://github.com/nanotexnolagiya/fop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nanotexnolagiya/fop"
+  },
   "author": "Islomkhuja <nanotexnolagiya@gmail.com>",
   "license": "MIT",
-  "private": false
+  "bugs": {
+    "url": "https://github.com/nanotexnolagiya/fop/issues"
+  },
+  "homepage": "https://github.com/nanotexnolagiya/fop#readme",
+  "private": false,
+  "dependencies": {
+    "faker": "^5.1.0",
+    "http-status-codes": "^2.1.4",
+    "joi": "^17.3.0"
+  }
 }
