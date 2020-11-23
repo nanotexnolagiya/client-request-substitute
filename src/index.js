@@ -1,7 +1,2 @@
-import { CrsRequest } from './crs-request'
-import { CrsResource } from './crs-resource'
-
-export default {
-  CrsRequest,
-  CrsResource
-}
+export { CrsRequest } from './crs-request'
+export { CrsResource } from './crs-resource'
