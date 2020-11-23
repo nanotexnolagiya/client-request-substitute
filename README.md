@@ -8,8 +8,8 @@ npm install client-request-substitute
 yarn add client-request-substitute
 ```
 # Example
-## Create Resource
-```
+### Create Resource
+```js
 import { CRSResource } from 'client-request-substitute'
 
 class UserResource extends CRSResource {
@@ -22,8 +22,8 @@ class UserResource extends CRSResource {
   }
 }
 ```
-## Create Request
-```
+### Create Request
+```js
 import { CRSRequest } from 'client-request-substitute'
 
 class UserRequest extends CRSRequest {
@@ -35,8 +35,8 @@ class UserRequest extends CRSRequest {
   }
 }
 ```
-## Using
-```
+### Using
+```js
 class UserService {
   static getUsers() {
     return new UserResource().getAll();
@@ -58,8 +58,8 @@ UserService.createUser({ first_name: "", email: "" })
   .catch(err => console.log( 'Request validate', err.response));
 
 ```
-## Result
-```
+### Result
+```jsx
 Using Resource 
 {
   status: 200,
@@ -100,3 +100,16 @@ Request validate
 
 ```
 # Documentation
+### CRSResource
+Properties:
+- `perPage:` Limit items in one page
+- `total:` Total items count
+- `faker:` Instance package [faker](https://github.com/marak/Faker.js/ "faker")
+- `statusCodes: ` HTTP Status codes use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
+- `getReasonPhrase: ` HTTP Status codes phrases use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
+
+Methods:
+- `template(status, data) { } ` Resource returned data default template
+-- Params:
+-- `status: ` Response status
+-- `data: ` Resource returned data
