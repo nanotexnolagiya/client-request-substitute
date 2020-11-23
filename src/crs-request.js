@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { getReasonPhrase, StatusCodes } from "http-status-codes";
 
-export class FopRequest {
+export class CrsRequest {
   constructor() {
     this.Joi = Joi;
     this.statusCodes = StatusCodes;

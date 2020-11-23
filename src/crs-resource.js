@@ -1,7 +1,7 @@
 import faker from "faker";
 import { getReasonPhrase, StatusCodes } from "http-status-codes";
 
-export class FopResource {
+export class CrsResource {
   constructor() {
     this.perPage = 20;
     this.total = 100;
