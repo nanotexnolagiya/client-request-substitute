@@ -10,9 +10,9 @@ yarn add client-request-substitute
 # Example
 ## Create Resource
 ```
-import CRS from 'client-request-substitute'
+import { CRSResource } from 'client-request-substitute'
 
-class UserResource extends CRS.Resource {
+class UserResource extends CRSResource {
   toCollection(faker) {
     return {
       id: faker.random.number(),
@@ -24,9 +24,9 @@ class UserResource extends CRS.Resource {
 ```
 ## Create Request
 ```
-import CRS from 'client-request-substitute'
+import { CRSRequest } from 'client-request-substitute'
 
-class UserRequest extends CRS.Request {
+class UserRequest extends CRSRequest {
   rules() {
     return {
       first_name: ["string", "min:3", "max:255", "required"],
