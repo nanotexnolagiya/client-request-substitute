@@ -1,20 +1,31 @@
 {
   "name": "client-request-substitute",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Frontend oriented programming",
   "repository": {
     "type": "git",
     "url": "https://github.com/nanotexnolagiya/client-request-substitute"
   },
-  "main": "./src/index.js",
+  "main": "./lib/index.js",
   "author": "Islomkhuja <nanotexnolagiya@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nanotexnolagiya/client-request-substitute/issues"
   },
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "homepage": "https://github.com/nanotexnolagiya/client-request-substitute#README",
   "private": false,
   "dependencies": {
+    "@babel/cli": "^7.12.7",
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
     "faker": "^5.1.0",
     "http-status-codes": "^2.1.4",
     "joi": "^17.3.0"

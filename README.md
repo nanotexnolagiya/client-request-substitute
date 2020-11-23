@@ -26,7 +26,7 @@ class UserResource extends CrsResource {
 ```
 import { CrsRequest } from 'client-request-substitute'
 
-class UserResource extends CrsRequest {
+class UserRequest extends CrsRequest {
   rules() {
     return {
       first_name: ["string", "min:3", "max:255", "required"],
