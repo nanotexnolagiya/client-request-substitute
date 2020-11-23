@@ -1,0 +1,10 @@
+{
+  "name": "fop",
+  "version": "1.0.0",
+  "description": "Frontend oriented programming",
+  "main": "index.js",
+  "repository": "https://github.com/nanotexnolagiya/fop",
+  "author": "Islomkhuja <nanotexnolagiya@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
