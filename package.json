@@ -1,6 +1,6 @@
 {
   "name": "client-request-substitute",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Frontend oriented programming",
   "repository": {
     "type": "git",
@@ -20,6 +20,11 @@
       "@babel/preset-env"
     ]
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node ./verifyCommitMsg.js"
+    }
+  },
   "homepage": "https://github.com/nanotexnolagiya/client-request-substitute#README",
   "private": false,
   "dependencies": {
@@ -28,6 +33,7 @@
     "@babel/preset-env": "^7.12.7",
     "faker": "^5.1.0",
     "http-status-codes": "^2.1.4",
+    "husky": "^4.3.0",
     "joi": "^17.3.0"
   }
 }
