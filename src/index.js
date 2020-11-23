@@ -1,2 +1,2 @@
-export { CrsRequest } from './crs-request'
-export { CrsResource } from './crs-resource'
+export { Request } from './request'
+export { Resource } from './resource'
