@@ -1,18 +1,18 @@
 {
   "name": "client-request-substitute",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Frontend oriented programming",
-  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nanotexnolagiya/fop"
+    "url": "https://github.com/nanotexnolagiya/client-request-substitute"
   },
+  "main": "./src/index.js",
   "author": "Islomkhuja <nanotexnolagiya@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nanotexnolagiya/fop/issues"
+    "url": "https://github.com/nanotexnolagiya/client-request-substitute/issues"
   },
-  "homepage": "https://github.com/nanotexnolagiya/fop#readme",
+  "homepage": "https://github.com/nanotexnolagiya/client-request-substitute#README",
   "private": false,
   "dependencies": {
     "faker": "^5.1.0",

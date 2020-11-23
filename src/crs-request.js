@@ -25,7 +25,18 @@ export class CrsRequest {
       this.values = await schema.validateAsync(data, {
         abortEarly: false
       });
-      return Resource ? new Resource().get() : null;
+      if (!Resource) {
+        throw new Error("Resource not found");
+      }
+      const item = await new Resource().get();
+      return {
+        ...item,
+        data: {
+          ...item.data,
+          message: this.getReasonPhrase(this.statusCodes.CREATED)
+        },
+        status: this.statusCodes.CREATED
+      };
     } catch (error) {
       const errors = {};
       const errorDetails = error.details;
