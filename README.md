@@ -122,19 +122,36 @@ Request validate failed
 
 ```
 # Documentation
-### CRSResource
-Properties:
+## CRSResource
+
+### Properties:
 - `perPage:` Limit items in one page
 - `timeout:` Timout returned response
 - `total:` Total items count
 - `faker:` Instance package [faker](https://github.com/marak/Faker.js/ "faker")
-- `statusCodes: ` HTTP Status codes use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
-- `getReasonPhrase: ` HTTP Status codes phrases use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
+- `statusCodes: ` HTTP Status codes
+- `ReasonPhrase: ` HTTP Status codes phrases
+
+### Methods
+`getAll(options) => {}`
+Options
+- `perPage:` One page items count
+- `page:` Current page
+
+`get(data) => {}`
+- `data:` Replaced data in generated item by resource
 
 
-### CRSRequest
-Properties:
+## CRSRequest
+
+### Properties:
 - `timeout:` Timout returned response
 - `Joi:` Instance package [Joi](https://github.com/sideway/joi/ "Joi")
-- `statusCodes: ` HTTP Status codes use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
-- `getReasonPhrase: ` HTTP Status codes phrases use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
+- `statusCodes: ` HTTP Status codes
+- `ReasonPhrase: ` HTTP Status codes phrases
+
+### Methods
+`send(data, Resource, replacedFields) => {}`
+- `data:` Validated data with rules
+- `Resource:` returned data Resource
+- `replacedFields:` replaced values returned data by validated values
