@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { getReasonPhrase, StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "./http-status-codes";
 
 export class CRSRequest {
   constructor() {

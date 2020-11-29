@@ -1,5 +1,5 @@
 import faker from "faker";
-import { getReasonPhrase as ReasonPhrases, StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "./http-status-codes";
 
 export class CRSResource {
   constructor() {
