@@ -1,4 +1,21 @@
-# Install
+# Table of Contents
+- [Installing](#installing)
+  - [Use npm](#use-npm)
+  - [Use yarn](#use-yarn)
+- [Example](#example)
+  - [Create Resource](#create-resource)
+  - [Create Request](#create-request)
+  - [Using](#using)
+  - [Result](#result)
+- [Documentation](#documentation)
+  - [CRSResource](#crsresource)
+    - [Properties](#properties)
+    - [Methods](#methods)
+  - [CRSRequest](#crsrequest)
+    - [Properties](#properties-1)
+    - [Methods](#methods-1)
+
+# Installing
 ## Use NPM
 ```bash
 npm install client-request-substitute
@@ -8,7 +25,7 @@ npm install client-request-substitute
 yarn add client-request-substitute
 ```
 # Example
-### Create Resource
+## Create Resource
 ```js
 import { CRSResource } from 'client-request-substitute'
 
@@ -22,7 +39,7 @@ class UserResource extends CRSResource {
   }
 }
 ```
-### Create Request
+## Create Request
 ```js
 import { CRSRequest } from 'client-request-substitute'
 
@@ -35,7 +52,7 @@ class UserRequest extends CRSRequest {
   }
 }
 ```
-### Using
+## Using
 ```js
 class UserService {
   static getUsers() {
@@ -66,7 +83,7 @@ UserService.createUser({ first_name: "", email: "" })
   .catch((err) => console.log("Request validate failed", err.response));
 
 ```
-### Result
+## Result
 ```jsx
 Using Resource get all:
 {

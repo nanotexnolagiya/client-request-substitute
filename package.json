@@ -1,6 +1,6 @@
 {
   "name": "client-request-substitute",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Frontend oriented programming",
   "publishConfig": {
     "access": "public"
@@ -15,6 +15,13 @@
   "bugs": {
     "url": "https://github.com/nanotexnolagiya/client-request-substitute/issues"
   },
+  "keywords": [
+    "request",
+    "substitute",
+    "mock",
+    "async",
+    "promise"
+  ],
   "scripts": {
     "build": "babel src --out-dir lib",
     "test": "jest"
