@@ -134,7 +134,8 @@ Request validate failed
 
 ### Methods
 `getAll(options) => {}`
-`options:`
+
+`options:` Properties
 - `perPage:` One page items count
 - `page:` Current page
 
