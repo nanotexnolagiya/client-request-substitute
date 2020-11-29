@@ -16,7 +16,8 @@
     "url": "https://github.com/nanotexnolagiya/client-request-substitute/issues"
   },
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib",
+    "test": "jest"
   },
   "babel": {
     "presets": [

@@ -3,6 +3,7 @@ import { getReasonPhrase, StatusCodes } from "http-status-codes";
 
 export class CRSResource {
   constructor() {
+    this.timeout = 2000;
     this.perPage = 20;
     this.currentPage = 1;
     this.total = 100;
@@ -38,7 +39,7 @@ export class CRSResource {
     };
   }
 
-  async getAll({ perPage, page }) {
+  getAll({ perPage, page }) {
     if (perPage) {
       this.perPage = perPage
       this.totalPages = Math.ceil(this.total / this.perPage)
@@ -49,13 +50,23 @@ export class CRSResource {
       .fill(null)
       .map(() => this.toCollection(this.faker));
 
-    return this.collectionTemplate(this.statusCodes.OK, items);
+    return new Promise((resolve, reject) => {
+      if (!this.statusCodes) reject(new Error('Status codes not found'))
+      setTimeout(() => {
+        resolve(this.collectionTemplate(this.statusCodes.OK, items))
+      }, this.timeout)
+    })
   }
 
-  async get(id) {
+  get(id) {
     const item = this.toCollection(this.faker);
     if (id) item.id = id;
-    return this.template(this.statusCodes.OK, item);
+    return new Promise((resolve, reject) => {
+      if (!this.statusCodes) reject(new Error('Status codes not found'))
+      setTimeout(() => {
+        resolve(this.template(this.statusCodes.OK, item))
+      }, this.timeout)
+    })
   }
 
   toCollection(faker) {
