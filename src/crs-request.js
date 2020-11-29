@@ -6,11 +6,11 @@ export class CRSRequest {
     this.timeout = 2000;
     this.Joi = Joi;
     this.statusCodes = StatusCodes;
-    this.getReasonPhrase = ReasonPhrases;
+    this.reasonPhrases = ReasonPhrases;
   }
 
   template(status, data) {
-    const error = new Error(this.getReasonPhrase(status));
+    const error = new Error(this.reasonPhrases[status]);
     error.response = {
       status,
       data: {

@@ -10,7 +10,7 @@ export class CRSResource {
     this.totalPages = Math.ceil(this.total / this.perPage);
     this.faker = faker;
     this.statusCodes = StatusCodes;
-    this.getReasonPhrase = ReasonPhrases;
+    this.reasonPhrases = ReasonPhrases;
   }
 
   template(status, data) {
@@ -52,7 +52,7 @@ export class CRSResource {
 
     const response = this.template(this.statusCodes.OK, {
       data: items,
-      message: this.getReasonPhrase(this.statusCodes.OK),
+      message: this.reasonPhrases[this.statusCodes.OK],
       meta: {
         total: this.total,
         per_page: this.perPage,
@@ -68,7 +68,7 @@ export class CRSResource {
     const item = this.toCollection(this.faker);
     const response = this.template(this.statusCodes.OK, {
       data: { ...item, ...data },
-      message: this.getReasonPhrase(this.statusCodes.OK)
+      message: this.reasonPhrases[this.statusCodes.OK]
     });
     return this.createResponse(response);
   }
