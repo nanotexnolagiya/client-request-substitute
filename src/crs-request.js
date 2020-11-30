@@ -1,16 +1,16 @@
 import Joi from "joi";
-import { getReasonPhrase, StatusCodes } from "http-status-codes";
+import { ReasonPhrases, StatusCodes } from "./http-status-codes";
 
 export class CRSRequest {
   constructor() {
-    this.timeout = 2000
+    this.timeout = 2000;
     this.Joi = Joi;
     this.statusCodes = StatusCodes;
-    this.getReasonPhrase = getReasonPhrase;
+    this.reasonPhrases = ReasonPhrases;
   }
 
   template(status, data) {
-    const error = new Error(this.getReasonPhrase(status));
+    const error = new Error(this.reasonPhrases[status]);
     error.response = {
       status,
       data: {
@@ -20,34 +20,42 @@ export class CRSRequest {
     return error;
   }
 
-  send(data, Resource) {
-    const $this = this
+  send(data, Resource, replacedFields = []) {
+    const $this = this;
     return new Promise((resolve, reject) => {
       if (!Resource) {
-        reject(new Error("Resource not found"))
+        reject(new Error("Resource not found"));
       }
       const schema = $this.schema();
-      schema.validateAsync(data, {
-        abortEarly: false
-      })
-      .then(values => {
-        $this.values = values
-        new Resource().get(Math.round(Math.random() * 100000))
-          .then(res => resolve(res))
-          .catch(err => reject(err))
-      })
-      .catch(error => {
-        const errors = {};
-        const errorDetails = error.details;
-        errorDetails.forEach((detail) => {
-          errors[detail.context.key] = errors[detail.key]
-            ? [...errors[detail.key], detail.message]
-            : [detail.message];
+      schema
+        .validateAsync(data, {
+          abortEarly: false
+        })
+        .then((values) => {
+          $this.values = values;
+          const gotData = replacedFields.reduce((acc, currVal) => {
+            acc[currVal] = values[currVal];
+            return acc;
+          }, {});
+          resolve(new Resource().get(gotData));
+        })
+        .catch((error) => {
+          const errors = {};
+          const errorDetails = error.details;
+          if (errorDetails) {
+            errorDetails.forEach((detail) => {
+              errors[detail.context.key] = errors[detail.key]
+                ? [...errors[detail.key], detail.message]
+                : [detail.message];
+            });
+          }
+          const response = this.template(
+            this.statusCodes.UNPROCESSABLE_ENTITY,
+            errors
+          );
+          setTimeout(() => reject(response), $this.timeout);
         });
-        const response = this.template(this.statusCodes.UNPROCESSABLE_ENTITY, errors)
-        setTimeout(() => reject(response), $this.timeout)
-      })
-    })
+    });
   }
 
   schema() {

@@ -1,4 +1,21 @@
-# Install
+# Table of Contents
+- [Installing](#installing)
+  - [Use npm](#use-npm)
+  - [Use yarn](#use-yarn)
+- [Example](#example)
+  - [Create Resource](#create-resource)
+  - [Create Request](#create-request)
+  - [Using](#using)
+  - [Result](#result)
+- [Documentation](#documentation)
+  - [CRSResource](#crsresource)
+    - [Properties](#properties)
+    - [Methods](#methods)
+  - [CRSRequest](#crsrequest)
+    - [Properties](#properties-1)
+    - [Methods](#methods-1)
+
+# Installing
 ## Use NPM
 ```bash
 npm install client-request-substitute
@@ -8,7 +25,7 @@ npm install client-request-substitute
 yarn add client-request-substitute
 ```
 # Example
-### Create Resource
+## Create Resource
 ```js
 import { CRSResource } from 'client-request-substitute'
 
@@ -22,7 +39,7 @@ class UserResource extends CRSResource {
   }
 }
 ```
-### Create Request
+## Create Request
 ```js
 import { CRSRequest } from 'client-request-substitute'
 
@@ -35,32 +52,54 @@ class UserRequest extends CRSRequest {
   }
 }
 ```
-### Using
+## Using
 ```js
 class UserService {
   static getUsers() {
-    return new UserResource().getAll();
+    return new UserResource().getAll({ perPage: 20, page: 1 });
   }
 
   static getUserById(id) {
-    return new UserResource().get(id);
+    return new UserResource().get({ id });
   }
 
   static createUser(data) {
-    return new UserRequest().send(data, UserResource);
+    return new UserRequest().send(data, UserResource, ["first_name", "email"]);
   }
 }
 
-UserService.getUserById(123).then(res => console.log('Using Resource: ', res));
+UserService.getUsers().then((res) =>
+  console.log("Using Resource get all: ", res)
+);
+
+UserService.getUserById(123).then((res) =>
+  console.log("Using Resource get by ID: ", res)
+);
+
 UserService.createUser({ first_name: "John Doe", email: "test@site.com" })
-  .then(res => console.log('Using Request and Resource', res))
+  .then((res) => console.log("Using Request and Resource", res));
+
 UserService.createUser({ first_name: "", email: "" })
-  .catch(err => console.log( 'Request validate', err.response));
+  .catch((err) => console.log("Request validate failed", err.response));
 
 ```
-### Result
+## Result
 ```jsx
-Using Resource 
+Using Resource get all:
+{
+  status: 200,
+  data: {
+    data: Array(20),
+    message: 'OK',
+    meta: {
+      page: 1
+      per_page: 20
+      total: 100
+      totalPages: 5
+    }
+  }
+}
+Using Resource get by ID
 {
   status: 200,
   data: {
@@ -78,15 +117,15 @@ Using Request and Resource
   status: 201,
   data: {
     data: {
-      id: 123
-      first_name: "Jeffrey"
-      email: "Elyssa_Brekke70@yahoo.com"
+      email: "test@site.com",
+      first_name: "John Doe",
+      id: 81958
     },
     message: "Created"
   }
 }
 
-Request validate
+Request validate failed
 {
   status: 422,
   data: {
@@ -100,16 +139,37 @@ Request validate
 
 ```
 # Documentation
-### CRSResource
-Properties:
+## CRSResource
+
+### Properties:
 - `perPage:` Limit items in one page
+- `timeout:` Timout returned response
 - `total:` Total items count
 - `faker:` Instance package [faker](https://github.com/marak/Faker.js/ "faker")
-- `statusCodes: ` HTTP Status codes use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
-- `getReasonPhrase: ` HTTP Status codes phrases use [http-status-codes](https://github.com/prettymuchbryce/http-status-codeshttp:// "http-status-codes")
+- `statusCodes: ` HTTP Status codes
+- `ReasonPhrase: ` HTTP Status codes phrases
 
-Methods:
-- `template(status, data) { } ` Resource returned data default template
--- Params:
--- `status: ` Response status
--- `data: ` Resource returned data
+### Methods
+`getAll(options) => {}`
+
+`options:` Properties
+- `perPage:` One page items count
+- `page:` Current page
+
+`get(data) => {}`
+- `data:` Replaced data in generated item by resource
+
+
+## CRSRequest
+
+### Properties:
+- `timeout:` Timout returned response
+- `Joi:` Instance package [Joi](https://github.com/sideway/joi/ "Joi")
+- `statusCodes: ` HTTP Status codes
+- `ReasonPhrase: ` HTTP Status codes phrases
+
+### Methods
+`send(data, Resource, replacedFields) => {}`
+- `data:` Validated data with rules
+- `Resource:` returned data Resource
+- `replacedFields:` replaced values returned data by validated values

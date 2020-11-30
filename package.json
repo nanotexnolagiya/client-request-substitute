@@ -1,6 +1,6 @@
 {
   "name": "client-request-substitute",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Frontend oriented programming",
   "publishConfig": {
     "access": "public"
@@ -15,14 +15,16 @@
   "bugs": {
     "url": "https://github.com/nanotexnolagiya/client-request-substitute/issues"
   },
+  "keywords": [
+    "request",
+    "substitute",
+    "mock",
+    "async",
+    "promise"
+  ],
   "scripts": {
     "build": "babel src --out-dir lib",
-    "start": "jest"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -33,13 +35,14 @@
   "private": false,
   "dependencies": {
     "faker": "^5.1.0",
-    "http-status-codes": "^2.1.4",
     "joi": "^17.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.7",
     "@babel/core": "^7.12.7",
     "@babel/preset-env": "^7.12.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.14.0",
     "husky": "^4.3.0",
     "jest": "^26.6.3"
   }
