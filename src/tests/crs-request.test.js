@@ -1,13 +1,14 @@
-import { CRSRequest } from "../index";
+import { CRSRequest } from "../crs-request";
+jest.mock("../crs-request")
 describe("Checking the CRSRequest class", () => {
 it('Methods validation have been called', () => {
-    expect(CRSRequest).not.toHaveBeenCalled();
     const crsRequest = new CRSRequest()
+    expect(crsRequest.template).not.toHaveBeenCalled();
+    expect(crsRequest.send).not.toHaveBeenCalled();
+    expect(crsRequest.schema).not.toHaveBeenCalled();
     expect(crsRequest.rules).not.toHaveBeenCalled();
   })
 it("We can check if the consumer called a method on the class instance", () => {
-  // Show that mockClear() is working:
-    expect(CRSRequest).not.toHaveBeenCalled();
 
     class UserRequest extends CRSRequest {
       rules() {
@@ -16,6 +17,10 @@ it("We can check if the consumer called a method on the class instance", () => {
           email: ["string", "email", "required"],
         };
       }
+    }
+
+    class UserResource {
+      
     }
 
     class UserService {

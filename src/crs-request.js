@@ -20,7 +20,7 @@ export class CRSRequest {
     return error;
   }
 
-  send(data, Resource, replacedFields) {
+  send(data, Resource) {
     const $this = this
     return new Promise((resolve, reject) => {
       if (!Resource) {
@@ -32,16 +32,9 @@ export class CRSRequest {
       })
       .then(values => {
         $this.values = values
-        const item = await new Resource().get();
-        const response = {
-          ...item,
-          data: {
-            ...item.data,
-            message: this.getReasonPhrase(this.statusCodes.CREATED)
-          },
-          status: this.statusCodes.CREATED
-        }
-        setTimeout(() => resolve(response), $this.timeout)
+        new Resource().get(Math.round(Math.random() * 100000))
+          .then(res => resolve(res))
+          .catch(err => reject(err))
       })
       .catch(error => {
         const errors = {};
